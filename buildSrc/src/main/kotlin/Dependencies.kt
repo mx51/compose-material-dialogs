@@ -14,7 +14,7 @@ object Dependencies {
     }
 
     object Kotlin {
-        private const val version = "1.4.32"
+        private const val version = "1.5.31"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
     }
@@ -25,7 +25,7 @@ object Dependencies {
         const val composeActivity = "androidx.activity:activity-compose:1.3.0-alpha06"
 
         object Compose {
-            const val version = "1.0.0-beta04"
+            const val version = "1.0.4"
 
             const val ui = "androidx.compose.ui:ui:$version"
             const val material = "androidx.compose.material:material:$version"

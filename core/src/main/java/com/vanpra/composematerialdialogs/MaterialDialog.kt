@@ -160,7 +160,10 @@ class MaterialDialog(
         ) ?: MaterialTheme.colors.surface
 
         if (showing.value) {
-            ThemedDialog(onCloseRequest = { onCloseRequest(this) }) {
+            ThemedDialog(onCloseRequest = {
+                onCloseRequest(this)
+                this.hide()
+            }) {
                 DisposableEffect(Unit) {
                     onDispose { resetDialog() }
                 }
