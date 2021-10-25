@@ -34,6 +34,8 @@ internal val LocalTime.simpleHour: Int
         return if (tempHour == 0) 12 else tempHour
     }
 
+operator fun LocalDate.rangeTo(other: LocalDate) = DateProgression(this, other)
+
 internal fun LocalTime.toAM(): LocalTime = if (this.isAM) this else this.minusHours(12)
 internal fun LocalTime.toPM(): LocalTime = if (!this.isAM) this else this.plusHours(12)
 

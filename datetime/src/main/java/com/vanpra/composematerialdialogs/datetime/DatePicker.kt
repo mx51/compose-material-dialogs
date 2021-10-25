@@ -53,12 +53,12 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.datetime.util.shortLocalName
-import kotlinx.coroutines.launch
 import java.time.LocalDate
 import java.time.Period
 import java.time.format.TextStyle.FULL
 import java.time.temporal.TemporalAdjusters
-import java.util.Locale
+import java.util.*
+import kotlinx.coroutines.launch
 
 internal class DatePickerState(val current: LocalDate) {
     var selected by mutableStateOf(current)
@@ -81,7 +81,9 @@ fun MaterialDialog.datepicker(
     waitForPositiveButton: Boolean = true,
     onComplete: (LocalDate) -> Unit = {}
 ) {
-    val dateRange = closedDateRange ?: initialDate.plusYears(-75).with(TemporalAdjusters.firstDayOfYear())..initialDate.plusYears(75).with(TemporalAdjusters.lastDayOfYear())
+    val dateRange = closedDateRange ?: initialDate.plusYears(-75)
+        .with(TemporalAdjusters.firstDayOfYear())..initialDate.plusYears(75)
+        .with(TemporalAdjusters.lastDayOfYear())
     if (initialDate !in dateRange) {
         throw IllegalArgumentException("The initial Date supplied is not in the given Date Range")
     }
@@ -257,8 +259,10 @@ private fun ViewPagerScope.CalendarViewHeader(
                 )
             }
         }
-        val nextMonth = viewDate.with(TemporalAdjusters.firstDayOfMonth()).plusMonths(1) in dateRange
-        val previousMonth = viewDate.with(TemporalAdjusters.lastDayOfMonth()).plusMonths(-1) in dateRange
+        val nextMonth =
+            viewDate.with(TemporalAdjusters.firstDayOfMonth()).plusMonths(1) in dateRange
+        val previousMonth =
+            viewDate.with(TemporalAdjusters.lastDayOfMonth()).plusMonths(-1) in dateRange
 
         Row(
             Modifier
@@ -307,7 +311,7 @@ private fun CalendarView(
         val month = remember(viewDate) { getDates(viewDate) }
         val possibleSelected = remember(datePickerData.selected, viewDate) {
             viewDate.year == datePickerData.selected.year &&
-                viewDate.month == datePickerData.selected.month
+                    viewDate.month == datePickerData.selected.month
         }
 
         for (y in 0..5) {
@@ -319,13 +323,14 @@ private fun CalendarView(
             ) {
                 for (x in 0 until 7) {
                     val day = month[y * 7 + x]
-                    val isValid: Boolean = if (viewDate.month == dateRange.endInclusive.month && viewDate.year == dateRange.endInclusive.year) {
-                        day <= dateRange.endInclusive.dayOfMonth
-                    } else if (viewDate.month == dateRange.start.month && viewDate.year == dateRange.start.year) {
-                        day >= dateRange.start.dayOfMonth
-                    } else {
-                        true
-                    }
+                    val isValid: Boolean =
+                        if (viewDate.month == dateRange.endInclusive.month && viewDate.year == dateRange.endInclusive.year) {
+                            day <= dateRange.endInclusive.dayOfMonth && day >= dateRange.start.dayOfMonth
+                        } else if (viewDate.month == dateRange.start.month && viewDate.year == dateRange.start.year) {
+                            day >= dateRange.start.dayOfMonth && day <= dateRange.endInclusive.dayOfMonth
+                        } else {
+                            true
+                        }
                     if (day != -1) {
                         val selected = remember(datePickerData.selected, possibleSelected) {
                             possibleSelected && day == datePickerData.selected.dayOfMonth

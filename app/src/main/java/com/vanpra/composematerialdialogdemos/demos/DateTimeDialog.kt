@@ -12,6 +12,7 @@ import com.vanpra.composematerialdialogs.datetime.datetimepicker
 import com.vanpra.composematerialdialogs.datetime.timepicker.TimePickerColors
 import com.vanpra.composematerialdialogs.datetime.timepicker.TimePickerDefaults
 import com.vanpra.composematerialdialogs.datetime.timepicker.timepicker
+import java.time.LocalDate
 import java.time.LocalTime
 
 /**
@@ -99,6 +100,19 @@ fun DateTimeDialogDemo() {
 
     DialogAndShowButton(buttonText = "Date Picker Dialog") {
         datepicker {
+            println(it.toString())
+        }
+
+        buttons {
+            positiveButton("Ok")
+            negativeButton("Cancel")
+        }
+    }
+
+    DialogAndShowButton(buttonText = "Date Picker Dialog MIN/MAX") {
+        datepicker(
+            closedDateRange = LocalDate.now().minusDays(10)..LocalDate.now().plusDays(1),
+        ) {
             println(it.toString())
         }
 
