@@ -30,7 +30,7 @@ class CommonModulePlugin: Plugin<Project> {
 //        android.run {
 //            lintOptions.isAbortOnError = false
 //
-//            compileSdkVersion(30)
+//            compileSdk = 31
 //
 //            buildFeatures.compose = true
 //

@@ -4,9 +4,9 @@ plugins {
 
 android {
     defaultConfig {
-        minSdkVersion(21)
-        targetSdkVersion(30)
-        compileSdkVersion(30)
+        minSdk = 21
+        targetSdk = 31
+        compileSdk = 31
 
 //        versionCode = 1
 
