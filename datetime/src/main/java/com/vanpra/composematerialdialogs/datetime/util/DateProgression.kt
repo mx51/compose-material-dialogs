@@ -13,4 +13,8 @@ class DateProgression(
         DateIterator(start, endInclusive, stepDays)
 
     infix fun step(days: Long) = DateProgression(start, endInclusive, days)
+
+    override fun contains(value: LocalDate): Boolean {
+        return value in start..endInclusive
+    }
 }

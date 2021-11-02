@@ -45,6 +45,8 @@ dependencies {
 
     implementation(Dependencies.Kotlin.stdlib)
 
+    implementation(Dependencies.AndroidX.Compose.animation)
+    implementation(Dependencies.AndroidX.Compose.foundationLayout)
     implementation(Dependencies.AndroidX.Compose.ui)
     implementation(Dependencies.AndroidX.Compose.material)
     implementation(Dependencies.AndroidX.Compose.materialIconsExtended)

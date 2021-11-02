@@ -27,6 +27,8 @@ object Dependencies {
         object Compose {
             const val version = "1.1.0-beta01"
 
+            const val animation = "androidx.compose.animation:animation:$version"
+            const val foundationLayout = "androidx.compose.foundation:foundation-layout:$version"
             const val ui = "androidx.compose.ui:ui:$version"
             const val material = "androidx.compose.material:material:$version"
             const val materialIconsExtended = "androidx.compose.material:material-icons-extended:$version"

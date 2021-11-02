@@ -136,8 +136,8 @@ internal fun DatePickerImpl(
                         .fillMaxSize()
                         .zIndex(0.7f)
                         .clipToBounds(),
-                    enter = slideInVertically({ -it }),
-                    exit = slideOutVertically({ -it })
+                    enter = slideInVertically(initialOffsetY = { -it }),
+                    exit = slideOutVertically(targetOffsetY = { -it })
                 ) {
                     YearPicker(yearRange, viewDate, yearPickerShowing, backgroundColor)
                 }
@@ -325,9 +325,17 @@ private fun CalendarView(
                     val day = month[y * 7 + x]
                     val isValid: Boolean =
                         if (viewDate.month == dateRange.endInclusive.month && viewDate.year == dateRange.endInclusive.year) {
-                            day <= dateRange.endInclusive.dayOfMonth && day >= dateRange.start.dayOfMonth
+                            if (dateRange.endInclusive.month == dateRange.start.month) {
+                                day <= dateRange.endInclusive.dayOfMonth && day >= dateRange.start.dayOfMonth
+                            } else {
+                                day <= dateRange.endInclusive.dayOfMonth
+                            }
                         } else if (viewDate.month == dateRange.start.month && viewDate.year == dateRange.start.year) {
-                            day >= dateRange.start.dayOfMonth && day <= dateRange.endInclusive.dayOfMonth
+                            if (dateRange.endInclusive.month == dateRange.start.month) {
+                                day >= dateRange.start.dayOfMonth && day <= dateRange.endInclusive.dayOfMonth
+                            } else {
+                                day >= dateRange.start.dayOfMonth
+                            }
                         } else {
                             true
                         }

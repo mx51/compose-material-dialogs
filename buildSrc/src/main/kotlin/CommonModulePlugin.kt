@@ -52,6 +52,8 @@ class CommonModulePlugin: Plugin<Project> {
             add("implementation", Dependencies.AndroidX.appcompat)
             add("implementation", Dependencies.material)
 
+            add("implementation", Dependencies.AndroidX.Compose.animation)
+            add("implementation", Dependencies.AndroidX.Compose.foundationLayout)
             add("implementation", Dependencies.AndroidX.Compose.ui)
             add("implementation", Dependencies.AndroidX.Compose.material)
             add("implementation", Dependencies.AndroidX.Compose.materialIconsExtended)
